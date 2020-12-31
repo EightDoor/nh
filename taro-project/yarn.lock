@@ -1191,10 +1191,10 @@
     "@tarojs/api" "3.0.21"
     "@tarojs/taro-h5" "3.0.21"
 
-"@tarojs/webpack-runner@3.0.21":
+"@tarojs/webpack-runner@^3.0.21":
   version "3.0.21"
-  resolved "https://registry.npm.taobao.org/@tarojs/webpack-runner/download/@tarojs/webpack-runner-3.0.21.tgz#845960a71da1eb6ff8a01b20a30e1f556348b20c"
-  integrity sha1-hFlgpx2h62/4oBsgow4fVWNIsgw=
+  resolved "https://registry.yarnpkg.com/@tarojs/webpack-runner/-/webpack-runner-3.0.21.tgz#845960a71da1eb6ff8a01b20a30e1f556348b20c"
+  integrity sha512-+QR4IdhqvdSXMRyBBCHQW/p57/mL2LIBNkIgbvw5VQ7rnr2dXkXBi/iyj3vAP85fU0fbFx0AtDAstzpbuyhdHw==
   dependencies:
     "@babel/core" "7.11.1"
     "@tarojs/helper" "3.0.21"
@@ -10242,6 +10242,11 @@ websocket-extensions@>=0.1.1:
   version "0.1.4"
   resolved "https://registry.npm.taobao.org/websocket-extensions/download/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
   integrity sha1-f4RzvIOd/YdgituV1+sHUhFXikI=
+
+weixin-js-sdk@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/weixin-js-sdk/-/weixin-js-sdk-1.6.0.tgz#ff50484d8118ce1208f11248cf4a1c0831577514"
+  integrity sha512-3IYQH7aalJGFJrwdT3epvTdR1MboMiH7vIZ5BRL2eYOJ12BNah7csoMkmSZzkq1+l92sSq29XdTCVjCJoK2sBQ==
 
 weui@^1.1.2:
   version "1.1.3"

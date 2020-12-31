@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9441b4c1-2973-42e8-861f-7c1f7fd95eca" name="Default Changelist" comment="" />
+    <list default="true" id="9441b4c1-2973-42e8-861f-7c1f7fd95eca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../taro-project/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../taro-project/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../taro-project/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../taro-project/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../taro-project/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../taro-project/global.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../taro-project/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../taro-project/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../taro-project/src/pages/index/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../taro-project/src/pages/index/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../taro-project/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../taro-project/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +46,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/components" />
     </key>
@@ -53,7 +61,8 @@
       <updated>1609232647876</updated>
       <workItem from="1609232649153" duration="4521000" />
       <workItem from="1609288540297" duration="561000" />
-      <workItem from="1609289421270" duration="11472000" />
+      <workItem from="1609289421270" duration="11685000" />
+      <workItem from="1609381567343" duration="919000" />
     </task>
     <servers />
   </component>

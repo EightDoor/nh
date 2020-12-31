@@ -1,28 +1,55 @@
-import React from 'react'
-import { useDispatch, useSelector} from 'react-redux'
-import { View, Button, Text } from '@tarojs/components'
-import {AtButton} from 'taro-ui';
-
-import { add, minus, asyncAdd } from '../../actions/counter'
-
+import React, {useState} from 'react'
+import { View } from '@tarojs/components'
+import { AtTabBar} from 'taro-ui';
+import { TabItem} from "taro-ui/types/tab-bar";
 import './index.less'
 
+
+import Home from '../home/home';
+// import Game from "../game/game";
+import My from "../my/my";
+
+interface  TabBarType {
+  current: number;
+  tabList: TabItem[]
+}
 const Index = ()=>{
-  const counter = useSelector(state => state.counter)
-  const dispatch = useDispatch()
+  const [tabBar, setTabBar] = useState<TabBarType>({
+    current: 0,
+    tabList: [
+      {
+        title: '首页',
+        iconType: 'home'
+      },
+      // {
+      //   title: '游戏',
+      //   iconType: 'play'
+      // },
+      {
+        title: '我的',
+        iconType: 'user'
+      }
+    ],
+  });
+  const ChangeBar = (index: number)=>{
+    setTabBar({...tabBar, current: index})
+  }
   return (
-    <>
-      <View className='index'>
-        <Button className='add_btn' onClick={()=> dispatch(add())}>+</Button>
-        <Button className='dec_btn' onClick={()=>dispatch(minus())}>-</Button>
-        <Button className='dec_btn' onClick={()=>dispatch(asyncAdd())}>async</Button>
-        <View><Text>{counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
-        <View>
-          <AtButton type='primary'>测试</AtButton>
-        </View>
+      <View>
+        <AtTabBar fixed current={tabBar.current} tabList={tabBar.tabList} onClick={ChangeBar} />
+        {
+          tabBar.current === 0?
+            <Home />:null
+        }
+        {/*{*/}
+        {/*  tabBar.current === 1?*/}
+        {/*    <Game />:null*/}
+        {/*}*/}
+        {
+          tabBar.current === 1?
+            <My />:null
+        }
       </View>
-    </>
   )
 }
 export default Index

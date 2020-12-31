@@ -1,9 +1,10 @@
 import React from 'react'
+import "./home.scss"
 
 const Home = ()=>{
     return (
         <>
-        999
+            <div className="container-home"/>
         </>
     )
 }
