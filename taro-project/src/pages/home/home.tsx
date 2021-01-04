@@ -34,10 +34,16 @@ const Home = ()=>{
       url: "/pages/game/game"
     })
   }
+  const HairBarrage = ()=>{
+    Taro.navigateTo({
+      url: "/pages/barrage/barrage"
+    })
+  }
   return (
     <Text>
       <AtButton onClick={()=>SignIn()}>签到</AtButton>
       <AtButton onClick={()=>GoGame()}>游戏</AtButton>
+      <AtButton onClick={()=>HairBarrage()}>发弹幕</AtButton>
     </Text>
   )
 }

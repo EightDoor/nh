@@ -1,27 +1,27 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {TWEEN} from 'three/examples/jsm/libs/tween.module.min';
 import {TrackballControls} from "three/examples/jsm/controls/TrackballControls"
 import {CSS3DRenderer, CSS3DObject} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // import State from 'stats.js';
+import Barrage from 'barrage-ui';
+import example from 'barrage-ui/example.json'; // 组件提供的示例数据
 import {useUnmount} from 'ahooks';
-import BulletScreen, { StyledBullet } from 'rc-bullets';
+
+
 import './sign-in.scss'
 import {useMount} from "ahooks";
 import config from "../config";
-const headUrl='https://zerosoul.github.io/rc-bullets/assets/img/heads/girl.jpg';
-
 
 interface ContentType  {
     title: string;
     url: string
 }
 // 签到
-const SignIn: React.FC = ()=>{
-    // 弹幕屏幕
-    const containerScreen = useRef<any>(null)
-    const [webSocket, setWebSocket] = useState<any>(null)
+const SignIn = ()=>{
+    const [webSocket, setWebSocket] = useState<any>()
+    const [barrage, setBarrage] = useState<any>();
     const cutomWidth = 2
     const url = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3582194852,1481557220&fm=26&gp=0.jpg"
     const table: ContentType[]  = [
@@ -36,32 +36,9 @@ const SignIn: React.FC = ()=>{
         {
             title: "H",
             url
-        },
-        {
-            title: "H",
-            url
-        },
-        {
-            title: "H",
-            url
-        },
-        {
-            title: "H",
-            url
-        },
-        {
-            title: "H",
-            url
-        },
-        {
-            title: "H",
-            url
-        },
-        {
-            title: "H",
-            url
-        },
+        }
     ];
+
     let camera: THREE.Camera, scene: THREE.Scene, renderer: CSS3DRenderer;
     let controls: TrackballControls;
     let controllRs: OrbitControls
@@ -76,6 +53,8 @@ const SignIn: React.FC = ()=>{
     useMount(()=>{
         init();
         animate();
+        InitBarrage()
+        InitWebSocket()
         let index = 0
         setInterval(()=>{
             if(index === 0) {
@@ -92,45 +71,32 @@ const SignIn: React.FC = ()=>{
                 index = 0
             }
         }, 4000)
-        InitBarrage()
-        InitWebSocket()
     })
-    const InitBarrage = ()=>{
-        // 给页面中某个元素初始化弹幕屏幕，一般为一个大区块。此处的配置项全局生效
-        let s = new BulletScreen(document.querySelector(".barrage"),{duration:20, loopCount: "infinite"});
-        // or
-        // let s=new BulletScreen(document.querySelector('.screen));
-        containerScreen.current = s;
-    }
-    // 发送弹幕
-    const HandleSend = (e: string) => {
-        // push 纯文本
-        // screen.push(e);
-        // or 使用 StyledBullet
-        if(containerScreen.current) {
-            containerScreen.current.push(
-                <StyledBullet
-                    head={headUrl}
-                    msg={e}
-                    backgroundColor={'#fff'}
-                    size='large'
-                />
-            );
-        }
-        // or 还可以这样使用，效果等同使用 StyledBullet 组件
-        // screen.push({msg:e,head:headUrl,color:"#eee", size:"large", backgroundColor:"rgba(2,2,2,.3)"})
-    };
     const InitWebSocket = ()=>{
         // webSocket
         const ws = new WebSocket(config.webSocketUrl)
         ws.onmessage = (e)=>{
             //当客户端收到服务端发来的消息时，触发onmessage事件，参数e.data包含server传递过来的数据
             console.log(e.data);
-            HandleSend(e.data)
         }
         ws.onopen = ()=>{
             //当WebSocket创建成功时，触发onopen事件
             console.log("open");
+            ws.send("hello"); //将消息发送到服务端
+        }
+        ws.onmessage = (e)=>{
+            //当客户端收到服务端发来的消息时，触发onmessage事件，参数e.data包含server传递过来的数据
+            console.log(e.data);
+            console.log(barrage)
+            if(barrage) {
+                barrage.add({
+                    key: Date.now(), // 弹幕的唯一标识
+                    time: 1000, // 弹幕出现的时间(单位：毫秒)
+                    text: e.data, // 弹幕文本内容
+                    fontSize: 24, // 该条弹幕的字号大小(单位：像素)，会覆盖全局设置
+                    color: '#0ff', // 该条弹幕的颜色，会覆盖全局设置
+                });
+            }
         }
         ws.onclose = (e)=>{
             //当客户端收到服务端发送的关闭连接请求时，触发onclose事件
@@ -142,7 +108,57 @@ const SignIn: React.FC = ()=>{
         }
         setWebSocket(ws)
     }
-
+    const InitBarrage = ()=>{
+        // 加载弹幕
+         const barrage = new Barrage({
+            container: document.getElementById('container'), // 父级容器
+            data: [
+                {
+                    "key": "n8alq5l22d8qqbuhgst68g",
+                    "time": 1200,
+                    "text": "8989",
+                    "fontFamily": "SimSun",
+                    "fontSize": 32,
+                    "color": "yellow",
+                    "createdAt": "2019-01-13T13:34:47.126Z",
+                    "avatar": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3582194852,1481557220&fm=26&gp=0.jpg",
+                    "avatarSize": 32,
+                    "avatarMarginRight": 8
+                },
+                {
+                    "key": "n8alq5l22d8qqbuhgst68g",
+                    "time": 1000,
+                    "text": "89999",
+                    "fontFamily": "SimSun",
+                    "fontSize": 32,
+                    "color": "yellow",
+                    "createdAt": "2019-01-13T13:34:47.126Z",
+                    "avatar": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3582194852,1481557220&fm=26&gp=0.jpg",
+                    "avatarSize": 32,
+                    "avatarMarginRight": 8
+                },
+            ], // 弹幕数据
+            config: {
+                // 全局配置项
+                duration: 20000, // 弹幕循环周期(单位：毫秒)
+                defaultColor: '#fff', // 弹幕默认颜色
+                fontSize: 24,
+                textShadowBlur: 1.0, // 字体阴影扩散，有效值 >= 0
+                opacity: 1.0, // 透明度，有效值 0-1
+            },
+        });
+        // setBarrage(barrage)
+        // 新增一条弹幕
+        barrage.add({
+            key: 'fctc651a9pm2j20bia8j',
+            time: 1000,
+            text: '这是新增的一条弹幕',
+            fontSize: 26,
+            color: '#0ff',
+        });
+        // 播放弹幕
+        barrage.play();
+    }
     useUnmount(()=>{
         if(webSocket) {
             webSocket.close()
@@ -345,13 +361,14 @@ const SignIn: React.FC = ()=>{
     }
 
     function render() {
+
         renderer.render( scene, camera );
+
     }
     return (
         <>
             <div id="container">
             </div>
-            <div className="barrage"/>
             {/*<div id="menu">*/}
             {/*    <button id="table">TABLE</button>*/}
             {/*    <button id="sphere">SPHERE</button>*/}
